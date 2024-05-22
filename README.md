@@ -2,6 +2,6 @@
 
 ## build instructions (linux):  
 
-in build dir:
-    cmake ..
-    cmake --build .
+in build dir:  
+    cmake ..  
+    cmake --build .  
