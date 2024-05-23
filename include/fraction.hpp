@@ -2,8 +2,6 @@
 
 #include "lmc.hpp"
 
-using i = int;
-
 class Fraction
 {
     public:
@@ -13,6 +11,9 @@ class Fraction
         // returns fraction that is equal to an integer
         Fraction(llint value);
 
+        // argument list: numerator, denominator
+        Fraction(llint num, llint den);
+
         // returns fraction that is equal to another fraction
         Fraction(const Fraction& other);
 
@@ -21,8 +22,47 @@ class Fraction
         Fraction& operator=(const std::string& other);
         Fraction& operator=(const Fraction& other);
 
+        Fraction operator+(llint value);
+        Fraction operator+(const Fraction& other);
+
+        Fraction operator*(llint value);
+        Fraction operator*(const Fraction& other);
+
+        Fraction operator-(llint value);
+        Fraction operator-(const Fraction& other);
+
+        Fraction operator/(llint value);
+        Fraction operator/(const Fraction& other);
+
+        Fraction& operator+=(llint value);
+        Fraction& operator+=(const Fraction& other);
+
+        Fraction& operator*=(llint value);
+        Fraction& operator*=(const Fraction& other);
+
+        Fraction& operator-=(llint value);
+        Fraction& operator-=(const Fraction& other);
+
+        Fraction& operator/=(llint value);
+        Fraction& operator/=(const Fraction& other);
+
+        bool operator==(llint value);
+        bool operator==(const Fraction& other);
+
+        Fraction& operator++();
+        Fraction& operator--();
+
         friend std::ostream& operator<<
             (std::ostream& ostream, const Fraction& fraction);
+
+        friend std::istream& operator>>
+            (std::istream& istream, Fraction& fraction);
+
+        llint Numerator();
+        llint Denominator();
+
+        // returns a float representation
+        double Float();
 
         void setNumerator(llint value);
         void setDenominator(llint value);
