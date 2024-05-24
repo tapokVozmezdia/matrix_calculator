@@ -55,6 +55,9 @@ class Fraction
         bool operator==(llint value);
         bool operator==(const Fraction& other);
 
+        bool operator!=(llint value);
+        bool operator!=(const Fraction& other);
+
         Fraction& operator++();
         Fraction& operator--();
 

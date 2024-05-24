@@ -240,6 +240,16 @@ bool Fraction::operator==(const Fraction& other)
     return true;
 }
 
+bool Fraction::operator!=(llint value)
+{
+    return !(*this == value);
+}
+
+bool Fraction::operator!=(const Fraction& other)
+{
+    return !(*this == other);
+}
+
 Fraction& Fraction::operator++()
 {
     return ((*this) += 1);
