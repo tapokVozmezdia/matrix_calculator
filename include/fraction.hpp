@@ -16,6 +16,10 @@ class Fraction
         // argument list: numerator, denominator
         Fraction(llint num, llint den);
 
+        // argument list: string in format 'x/y' as an argument. 
+        // example: f1("5/3")
+        Fraction(const std::string& fraction);
+
         // returns fraction that is equal to another fraction
         Fraction(const Fraction& other);
 

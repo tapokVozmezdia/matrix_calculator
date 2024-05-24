@@ -39,6 +39,11 @@ Fraction::Fraction(llint num, llint den)
     this->__simplify();
 }
 
+Fraction::Fraction(const std::string& fraction)
+{
+    *this = fraction;
+}
+
 Fraction::Fraction(const Fraction& other) 
 {
     this->_numerator = other._numerator;
@@ -184,7 +189,7 @@ Fraction& Fraction::operator+=(const Fraction& other)
 
 Fraction& Fraction::operator*=(llint value)
 {
-    *this = *this + value;
+    *this = *this * value;
     return *this;
 }
 
