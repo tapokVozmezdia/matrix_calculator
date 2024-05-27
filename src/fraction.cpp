@@ -2,6 +2,7 @@
 #include <string>
 #include <sstream>
 #include <numeric>
+#include <cmath>
 
 #include "fraction.hpp"
 
@@ -23,9 +24,29 @@ std::istream& operator>>(std::istream& istream, Fraction& fraction)
     return istream;
 }
 
+Fraction::Fraction(int value)
+{
+    this->_numerator = value;
+}
+
+Fraction::Fraction(uint value)
+{
+    this->_numerator = value;
+}
+
 Fraction::Fraction(llint value) 
 {
     this->_numerator = value;
+}
+
+Fraction::Fraction(float value)
+{
+    *this = value;
+}
+
+Fraction::Fraction(double value)
+{
+    *this = value;
 }
 
 Fraction::Fraction(llint num, llint den)
@@ -44,6 +65,11 @@ Fraction::Fraction(const std::string& fraction)
     *this = fraction;
 }
 
+Fraction::Fraction(const char* fraction)
+{
+    *this = fraction;
+}
+
 Fraction::Fraction(const Fraction& other) 
 {
     this->_numerator = other._numerator;
@@ -57,10 +83,42 @@ Fraction& Fraction::operator=(llint value)
     return *this;
 }
 
+Fraction& Fraction::operator=(float value)
+{
+    llint den = 1;
+
+    while(true)
+    {   
+        if (value == std::round(value))
+        {
+            this->_numerator = value;
+            this->_denominator = den;
+
+            this->__simplify();
+
+            return *this;
+        }
+        value *= 10;
+        den *= 10;
+    }
+}
+
+Fraction& Fraction::operator=(double value)
+{
+    *this = static_cast<float>(value);
+    return *this;
+}
+
 Fraction& Fraction::operator=(const std::string& other)
 {
     if (other.length() == 0)
         return *this;
+
+    if (lmc::is_double(other))
+    {
+        *this = std::stof(other);
+        return *this;
+    }
 
     std::stringstream s(other);
 
@@ -77,6 +135,12 @@ Fraction& Fraction::operator=(const std::string& other)
 
     this->__simplify();
 
+    return *this;
+}
+
+Fraction& Fraction::operator=(const char* other)
+{
+    *this = std::string(other);
     return *this;
 }
 
